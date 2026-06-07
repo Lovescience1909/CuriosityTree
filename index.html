@@ -1,162 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Curiosity Tree</title>
-<style>
-:root{
---bg:#f8f3ee;
---card:#fffdf9;
---accent:#8ca58c;
---rose:#c89aa5;
---gold:#c7a86b;
---text:#3b3340;
-}
-*{box-sizing:border-box}
-body{
-margin:0;
-font-family:Georgia, serif;
-background:linear-gradient(to bottom,var(--bg),#fdfaf6);
-color:var(--text);
-}
-.hero{
-min-height:90vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:40px 20px;
-}
-.logo{
-font-size:5rem;
-}
-h1{
-font-size:4rem;
-margin:10px 0;
-font-weight:normal;
-}
-.subtitle{
-max-width:700px;
-font-size:1.25rem;
-line-height:1.7;
-opacity:.9;
-}
-.search{
-margin-top:30px;
-width:min(800px,90%);
-padding:18px 24px;
-border-radius:999px;
-border:2px solid #e7ddd3;
-background:white;
-font-size:1.1rem;
-}
-.topics{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:18px;
-width:min(1000px,90%);
-margin-top:50px;
-}
-.topic{
-background:var(--card);
-padding:24px;
-border-radius:24px;
-box-shadow:0 8px 24px rgba(0,0,0,.06);
-}
-.topic h3{
-margin:0 0 10px 0;
-font-weight:normal;
-}
-.section{
-width:min(1000px,90%);
-margin:auto;
-padding:40px 0 80px;
-}
-.section h2{
-font-weight:normal;
-font-size:2rem;
-}
-.card{
-background:var(--card);
-padding:22px;
-margin:14px 0;
-border-radius:20px;
-box-shadow:0 8px 24px rgba(0,0,0,.05);
-border-left:5px solid var(--rose);
-}
-.footer{
-text-align:center;
-padding:40px;
-opacity:.7;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CuriosityTree - Human Biology, Made Interactive</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fafafa;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: white;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2d6a4f;
+        }
+        
+        .logo span {
+            color: #52b788;
+        }
+        
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+        
+        .cta {
+            display: inline-block;
+            background: #2d6a4f;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .cta:hover {
+            background: #1b4332;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            padding: 60px 0;
+        }
+        
+        .feature {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            border: 1px solid #e5e5e5;
+        }
+        
+        .feature h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #2d6a4f;
+        }
+        
+        .feature p {
+            color: #666;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #999;
+            border-top: 1px solid #e5e5e5;
+            margin-top: 60px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .hero p { font-size: 18px; }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="container">
+            <div class="logo">Curiosity<span>Tree</span></div>
+        </div>
+    </header>
 
-<div class="hero">
-<div class="logo">🌳🌸</div>
-<h1>Curiosity Tree</h1>
-<p class="subtitle">
-Where questions blossom into knowledge. Explore anatomy, theology,
-history, science, and language through thoughtful discussions and
-beautifully connected ideas.
-</p>
+    <section class="hero">
+        <div class="container">
+            <h1>Explore Human Biology</h1>
+            <p>Interactive, easy to study, and built for curiosity. Trace systems, follow threads, and see how your body works.</p>
+            <a href="#start" class="cta">Start Exploring</a>
+        </div>
+    </section>
 
-<input class="search" placeholder="What are you curious about today?">
+    <section class="container">
+        <div class="features">
+            <div class="feature">
+                <h3>PathTree</h3>
+                <p>Choose your learning path. Jump between cells, organs, and systems without getting lost.</p>
+            </div>
+            <div class="feature">
+                <h3>TraceTree</h3>
+                <p>Trace nerves, blood flow, and signals. See connections, not just definitions.</p>
+            </div>
+            <div class="feature">
+                <h3>LightTree</h3>
+                <p>Complex topics made clear. Short explanations, visuals, and interactive diagrams.</p>
+            </div>
+        </div>
+    </section>
 
-<div class="topics">
-<div class="topic">
-<h3>🦴 Human Body</h3>
-<p>Bones, muscles, organs, physiology.</p>
-</div>
-
-<div class="topic">
-<h3>📖 Sacred Texts</h3>
-<p>Theology, traditions, and interpretation.</p>
-</div>
-
-<div class="topic">
-<h3>🕊️ Language & Meaning</h3>
-<p>Translation, etymology, and expression.</p>
-</div>
-
-<div class="topic">
-<h3>🏺 History & Culture</h3>
-<p>People, civilizations, and ideas.</p>
-</div>
-
-<div class="topic">
-<h3>🔬 Science</h3>
-<p>Biology, chemistry, and discovery.</p>
-</div>
-</div>
-</div>
-
-<div class="section">
-<h2>🌿 Growing Questions</h2>
-
-<div class="card">
-Why do wisdom teeth sometimes never develop?
-</div>
-
-<div class="card">
-Is the acromion part of the scapular spine?
-</div>
-
-<div class="card">
-What is chalitzah and why was it practiced?
-</div>
-
-<div class="card">
-Why does inflammation happen during infection?
-</div>
-</div>
-
-<div class="footer">
-🌸 Every answer grows the tree. 🌸
-</div>
-
+    <footer>
+        <div class="container">
+            <p>© 2026 CuriosityTree. Learning made interactive.</p>
+        </div>
+    </footer>
 </body>
 </html>
