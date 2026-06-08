@@ -11,10 +11,20 @@
 <style>
   :root {
     --bg: #f8f3ee;
-    --accent: #2d6a4f;
-    --accent-dark: #1b4332;
     --text-primary: #1a1a1a;
     --text-secondary: #4a4a4a;
+    
+    /* Glossy pill gradients - no green */
+    --gradient-red: linear-gradient(135deg, #f87171 0%, #dc2626 45%, #b91c1c 100%);
+    --gradient-white: linear-gradient(135deg, #ffffff 0%, #f5f5f5 45%, #e5e5e5 100%);
+    --gradient-gray: linear-gradient(135deg, #a3a3a3 0%, #737373 45%, #525252 100%);
+    --gradient-orange: linear-gradient(135deg, #fb923c 0%, #ea580c 45%, #c2410c 100%);
+    --gradient-violet: linear-gradient(135deg, #c084fc 0%, #9333ea 45%, #7e22ce 100%);
+    --gradient-pink: linear-gradient(135deg, #f472b6 0%, #db2777 45%, #be185d 100%);
+    --gradient-teal: linear-gradient(135deg, #2dd4bf 0%, #0d9488 45%, #0f766e 100%);
+    
+    /* CTA only */
+    --gradient-cta: linear-gradient(135deg, #34d399 0%, #059669 45%, #047857 100%);
   }
   
   html {
@@ -23,7 +33,7 @@
   
   body {
     font-family: 'Source Serif 4', serif;
-    background-color: var(--bg);
+    background: radial-gradient(ellipse 120% 80% at 50% 0%, #fff 0%, var(--bg) 100%);
     color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -51,10 +61,10 @@
     opacity: 0;
     pointer-events: none;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    background-color: rgba(248, 243, 238, 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+    background: rgba(248, 243, 238, 0.85);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
     transform: translateY(-100%);
   }
   
@@ -97,6 +107,7 @@
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     transform-origin: center center;
     will-change: transform, font-size;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   }
   
   .hero-title.hidden {
@@ -104,51 +115,149 @@
     pointer-events: none;
   }
   
+  /* Glossy button base */
+  .btn-glossy {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 
+                0 2px 8px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  
+  .btn-glossy::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 55%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  
+  .btn-glossy::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  
+  .btn-glossy:hover {
+    transform: translateY(-3px) scale(1.02);
+    filter: brightness(1.08);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18), 
+                0 4px 12px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+  
+  .btn-glossy:active {
+    transform: translateY(-1px) scale(0.98);
+  }
+  
   .btn-primary {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 14px 0 rgba(45, 106, 79, 0.25);
-  }
-  
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px 0 rgba(45, 106, 79, 0.35);
-  }
-  
-  .btn-primary:active {
-    transform: translateY(0);
+    background: var(--gradient-cta);
   }
   
   .search-input {
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06),
+                inset 0 2px 4px rgba(0, 0, 0, 0.04);
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
   }
   
   .search-input:focus {
-    box-shadow: 0 4px 16px rgba(45, 106, 79, 0.15);
-    border-color: var(--accent);
+    box-shadow: 0 6px 24px rgba(5, 150, 105, 0.2),
+                inset 0 2px 4px rgba(0, 0, 0, 0.04);
+    border-color: #059669;
   }
   
-  .tab-button {
-    transition: all 0.25s ease;
-    border: 1.5px solid rgba(45, 106, 79, 0.2);
+  /* Glossy tabs */
+  .tab-glossy {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    padding: 0.625rem 1.5rem;
+    border-radius: 9999px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1),
+                0 1px 4px rgba(0, 0, 0, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
   }
   
-  .tab-button:hover {
-    border-color: var(--accent);
-    background-color: rgba(45, 106, 79, 0.08);
-    transform: translateY(-1px);
+  .tab-glossy::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 100%);
+    border-radius: inherit;
+    pointer-events: none;
   }
   
-  .tab-button.active {
-    background-color: var(--accent);
+  .tab-glossy:hover {
+    transform: translateY(-2px) scale(1.05);
+    filter: brightness(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15),
+                0 2px 6px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+  
+  .tab-glossy.active {
+    transform: scale(1.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2),
+                0 2px 8px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+  
+  .tab-red { 
+    background: var(--gradient-red); 
     color: white;
-    border-color: var(--accent);
-    box-shadow: 0 4px 12px rgba(45, 106, 79, 0.25);
+  }
+  .tab-white { 
+    background: var(--gradient-white); 
+    color: #1a1a1a;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+  }
+  .tab-gray { 
+    background: var(--gradient-gray); 
+    color: white;
+  }
+  .tab-orange { 
+    background: var(--gradient-orange); 
+    color: white;
+  }
+  .tab-violet { 
+    background: var(--gradient-violet); 
+    color: white;
+  }
+  .tab-pink { 
+    background: var(--gradient-pink); 
+    color: white;
+  }
+  .tab-teal { 
+    background: var(--gradient-teal); 
+    color: white;
   }
   
   .hero-gradient {
-    background: radial-gradient(ellipse 80% 50% at 50% 20%, rgba(45, 106, 79, 0.08), transparent);
+    background: 
+      radial-gradient(ellipse 70% 50% at 30% 20%, rgba(244, 114, 182, 0.18), transparent),
+      radial-gradient(ellipse 60% 40% at 70% 25%, rgba(192, 132, 252, 0.12), transparent),
+      radial-gradient(ellipse 80% 50% at 50% 80%, rgba(251, 146, 60, 0.1), transparent);
   }
   
   @keyframes fadeInUp {
@@ -177,12 +286,26 @@
     position: relative;
     z-index: 2;
     background-color: var(--bg);
+    scroll-margin-top: 90px;
   }
 
   @media (max-width: 640px) {
     .sticky-header .brand-font {
-      font-size: 2.5rem !important;
+      font-size: 2.25rem !important;
     }
+    .tab-glossy {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
   }
 </style>
 </head>
@@ -192,16 +315,13 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between">
       <div class="header-logo">
-        <svg class="w-7 h-7 text-[#2d6a4f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2L7 7M12 2L17 7M12 2V6M8 7L5 10M16 7L19 10M6 10L3 13M18 10L21 13M4 13L3 16M20 13L21 16M6 16C6 18.2091 7.79086 20 10 20H14C16.2091 20 18 18.2091 18 16H6Z"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6V16M12 16C10 16 8 18 8 20M12 16C14 16 16 18 16 20"></path>
-        </svg>
+        <img src="container:///mnt/data/image_ef6ff2.png" alt="CuriosityTree logo" class="w-10 h-10 object-contain">
         <span class="brand-font text-6xl tracking-tight text-[#1a1a1a]">CuriosityTree</span>
       </div>
       <nav class="hidden md:flex items-center gap-8">
-        <a href="#explore" class="heading-font text-sm font-medium text-[#4a4a4a] hover:text-[#2d6a4f] transition-colors">Explore</a>
-        <a href="#about" class="heading-font text-sm font-medium text-[#4a4a4a] hover:text-[#2d6a4f] transition-colors">About</a>
-        <a href="#library" class="heading-font text-sm font-medium text-[#4a4a4a] hover:text-[#2d6a4f] transition-colors">Library</a>
+        <a href="#explore" class="heading-font text-sm font-medium text-[#4a4a4a] hover:text-[#059669] transition-colors">Explore</a>
+        <a href="#about" class="heading-font text-sm font-medium text-[#4a4a4a] hover:text-[#059669] transition-colors">About</a>
+        <a href="#library" class="heading-font text-sm font-medium text-[#4a4a4a] hover:text-[#059669] transition-colors">Library</a>
       </nav>
     </div>
   </div>
@@ -218,12 +338,12 @@
     
     <div class="hero-subtitle animate-fade-in-up animate-delay-1">
       <p class="text-lg sm:text-xl text-[#4a4a4a] leading-relaxed max-w-2xl mx-auto mb-10">
-        Interactive, easy to study, and built for curiosity. Trace systems, follow threads, and see how your body works.
+        Interactive, easy to study, and built for curiosity.
       </p>
     </div>
     
     <div class="hero-button animate-fade-in-up animate-delay-2 mb-12">
-      <button class="btn-primary heading-font inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-base">
+      <button class="btn-glossy btn-primary heading-font inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-base">
         Start Exploring
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
@@ -237,9 +357,9 @@
           <input 
             type="text" 
             placeholder="Ask a human biology question..." 
-            class="search-input heading-font w-full px-6 py-4 pr-14 rounded-full border-2 border-gray-200 bg-white text-[#1a1a1a] placeholder-[#999] focus:outline-none focus:border-[#2d6a4f]"
+            class="search-input heading-font w-full px-6 py-4 pr-14 rounded-full border-2 border-gray-200 bg-white text-[#1a1a1a] placeholder-[#999] focus:outline-none focus:border-[#059669]"
           >
-          <button class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[#2d6a4f] text-white flex items-center justify-center hover:bg-[#1b4332] transition-colors">
+          <button class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[#059669] text-white flex items-center justify-center hover:bg-[#047857] transition-colors">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
@@ -250,17 +370,26 @@
     
     <div class="hero-tabs animate-fade-in-up animate-delay-4">
       <div class="flex flex-wrap items-center justify-center gap-3">
-        <button class="tab-button heading-font px-6 py-2.5 rounded-full text-sm font-medium text-[#2d6a4f] active" data-tab="human-biology">
-          Human Biology
+        <button class="tab-glossy tab-orange active" data-tab="digestive">
+          Digestive
         </button>
-        <button class="tab-button heading-font px-6 py-2.5 rounded-full text-sm font-medium text-[#2d6a4f]" data-tab="physiology">
-          Physiology
+        <button class="tab-glossy tab-pink" data-tab="circulatory">
+          Circulatory
         </button>
-        <button class="tab-button heading-font px-6 py-2.5 rounded-full text-sm font-medium text-[#2d6a4f]" data-tab="cell-biology">
-          Cell Biology
+        <button class="tab-glossy tab-teal" data-tab="nervous">
+          Nervous
         </button>
-        <button class="tab-button heading-font px-6 py-2.5 rounded-full text-sm font-medium text-[#2d6a4f]" data-tab="genetics">
-          Genetics
+        <button class="tab-glossy tab-violet" data-tab="respiratory">
+          Respiratory
+        </button>
+        <button class="tab-glossy tab-gray" data-tab="skeletal">
+          Skeletal
+        </button>
+        <button class="tab-glossy tab-red" data-tab="muscular">
+          Muscular
+        </button>
+        <button class="tab-glossy tab-white" data-tab="immune">
+          Immune
         </button>
       </div>
     </div>
@@ -304,10 +433,7 @@
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col md:flex-row items-center justify-between gap-6">
         <div class="flex items-center gap-3">
-          <svg class="w-6 h-6 text-[#2d6a4f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2L7 7M12 2L17 7M12 2V6M8 7L5 10M16 7L19 10M6 10L3 13M18 10L21 13M4 13L3 16M20 13L21 16M6 16C6 18.2091 7.79086 20 10 20H14C16.2091 20 18 18.2091 18 16H6Z"></path>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6V16M12 16C10 16 8 18 8 20M12 16C14 16 16 18 16 20"></path>
-          </svg>
+          <img src="container:///mnt/data/image_ef6ff2.png" alt="CuriosityTree logo" class="w-8 h-8 object-contain">
           <span class="brand-font text-5xl tracking-tight text-[#1a1a1a]">CuriosityTree</span>
         </div>
         <p class="text-sm text-[#4a4a4a] text-center md:text-right">
@@ -357,7 +483,7 @@
   updateScrollEffect();
   
   // Tab button interaction
-  const tabButtons = document.querySelectorAll('.tab-button');
+  const tabButtons = document.querySelectorAll('.tab-glossy');
   
   tabButtons.forEach(button => {
     button.addEventListener('click', function() {
@@ -383,6 +509,5 @@
     });
   });
 </script>
-<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
 </body>
 </html>
